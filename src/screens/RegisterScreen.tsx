@@ -62,7 +62,7 @@ export default function RegisterScreen() {
         style={styles.input} 
       />
       <TextInput 
-        placeholder="Documento" 
+        placeholder="CPF" 
         value={document} 
         onChangeText={setDocument} 
         style={styles.input} 

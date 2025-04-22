@@ -1,17 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { v4 as uuidv4 } from 'uuid';
+import { useAuth } from '../context/AuthContext';
+import { StackNavigationProp } from '@react-navigation/stack';
+
+type RootStackParamList = {
+  Login: undefined;
+  Register: undefined;
+  Dashboard: undefined; 
+};
 
 export default function NovaTransacaoScreen() {
   const [emailDestinatario, setEmailDestinatario] = useState('');
   const [valor, setValor] = useState('');
   const [descricao, setDescricao] = useState('');
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const { user } = useAuth();
 
   const handleEnviar = async () => {
     const valorNumerico = parseFloat(valor);
+
+    useEffect(() => {
+        if (user) {
+          navigation.replace('Dashboard'); // redireciona para Dashboard se já estiver logado
+        }
+      }, [user]);
 
     if (!emailDestinatario || !descricao || isNaN(valorNumerico) || valorNumerico <= 0) {
       Alert.alert('Erro', 'Preencha todos os campos corretamente');

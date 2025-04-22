@@ -35,6 +35,8 @@ export default function LoginScreen({ navigation }: Props) {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>Matcha Bank</Text> 
+      
       <TextInput
         placeholder="Email"
         value={email}
@@ -58,6 +60,13 @@ export default function LoginScreen({ navigation }: Props) {
 
 const styles = StyleSheet.create({
   container: { padding: 16, flex: 1, justifyContent: 'center' },
+  title: {
+    fontSize: 32,  
+    fontWeight: 'bold', 
+    color: 'green',  
+    textAlign: 'center', 
+    marginBottom: 20, 
+  },
   input: { borderWidth: 1, marginBottom: 10, padding: 8, borderRadius: 4 },
   registerText: {
     textAlign: 'center',

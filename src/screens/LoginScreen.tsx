@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { useAuth } from '../context/AuthContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-// Definição da estrutura de rotas
+// 🔧 Corrigir a tipagem das rotas incluindo "Dashboard"
 type RootStackParamList = {
   Login: undefined;
   Register: undefined;
+  Dashboard: undefined; // <--- adicionado
 };
 
 // Tipagem da prop navigation
@@ -20,12 +21,18 @@ interface Props {
 export default function LoginScreen({ navigation }: Props) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
-  const { login } = useAuth();
+  const { login, user } = useAuth();
 
   const handleLogin = async () => {
     const success = await login(email, senha);
     if (!success) Alert.alert('Erro', 'Credenciais inválidas');
   };
+
+  useEffect(() => {
+    if (user) {
+      navigation.replace('Dashboard'); // redireciona para Dashboard se já estiver logado
+    }
+  }, [user]);
 
   return (
     <View style={styles.container}>

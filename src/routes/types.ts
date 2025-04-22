@@ -1,8 +1,8 @@
 export type RootStackParamList = {
     Login: undefined;
-    Cadastro: undefined;
+    Register: undefined;
     Dashboard: undefined;
-    Transição: undefined;
+    Transition: undefined;
     Perfil: undefined;
   };
   

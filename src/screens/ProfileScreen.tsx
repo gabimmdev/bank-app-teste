@@ -1,10 +1,25 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
 import { useAuth } from '../context/AuthContext';
+import { useNavigation } from '@react-navigation/native';
+import { NavigationProp } from '@react-navigation/native';
+
+type RootStackParamList = {
+  Login: undefined;
+  Register: undefined;
+  Dashboard: undefined;
+};
 
 export default function ProfileScreen() {
+  const navigation = useNavigation<NavigationProp<RootStackParamList>>();
   const { user, updateUser, logout } = useAuth();
   const [name, setName] = useState(user?.name || '');
+
+  useEffect(() => {
+    if (user) {
+      navigation.replace('Dashboard');
+    }
+  }, [user]);
 
   const handleSave = () => {
     if (!name.trim()) {

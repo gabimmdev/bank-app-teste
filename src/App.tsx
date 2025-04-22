@@ -1,11 +1,17 @@
 import React from 'react';
-import { AuthProvider } from '../src/context/AuthContext';
+import { Provider as PaperProvider } from 'react-native-paper';
 import Routes from '../src/routes';
+import { AuthProvider } from './context/AuthContext';
+import { NavigationContainer } from '@react-navigation/native'; // 👈 Importar aqui
 
 export default function App() {
   return (
-    <AuthProvider>
-      <Routes />
-    </AuthProvider>
+    <PaperProvider>
+      <AuthProvider>
+        <NavigationContainer> 
+          <Routes />
+        </NavigationContainer>
+      </AuthProvider>
+    </PaperProvider>
   );
 }

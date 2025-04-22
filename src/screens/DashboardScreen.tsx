@@ -1,17 +1,11 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  StyleSheet,
-  RefreshControl,
-  Button,
-} from 'react-native';
+import { View,Text,FlatList,StyleSheet,RefreshControl,Button,} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from '../context/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../routes/types';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 type Transaction = {
   id: string;
@@ -68,8 +62,17 @@ export default function DashboardScreen() {
           item.type === 'credit' ? styles.credit : styles.debit,
         ]}
       >
-        {item.type === 'credit' ? '💸 + ' : '📤 - '}R$ {item.value.toFixed(2)}
+        R$ {item.value.toFixed(2)}
       </Text>
+      <View style={styles.iconText}>
+        <View style={{ marginRight: 8 }}>
+        <MaterialCommunityIcons>
+        name={item.type === 'credit' ? 'arrow-down-bold-circle' : 'arrow-up-bold-circle'}
+        size={24}
+        color={item.type === 'credit' ? 'green' : 'red'}
+      </MaterialCommunityIcons>
+      </View>
+        </View>
     </View>
   );
 
@@ -97,7 +100,7 @@ export default function DashboardScreen() {
         ListEmptyComponent={<Text style={styles.empty}>Sem transações</Text>}
       />
 
-      <Button title="Nova Transação" onPress={() => navigation.navigate('Transição')} />
+      <Button title="Nova Transação" onPress={() => navigation.navigate('Transition')} />
       <Button title="Perfil" onPress={() => navigation.navigate('Perfil')} />
       <Button title="Sair" color="red" onPress={logout} />
     </View>
@@ -136,5 +139,11 @@ const styles = StyleSheet.create({
   value: { fontSize: 16, fontWeight: 'bold' },
   credit: { color: 'green' },
   debit: { color: 'red' },
-  empty: { textAlign: 'center', marginTop: 32, color: '#999' },
+  empty: { textAlign: 'center', marginTop: 32, color: '#999' 
+  },
+  iconText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  
 });

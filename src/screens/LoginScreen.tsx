@@ -3,17 +3,16 @@ import { View, TextInput, Button, Alert, StyleSheet, TouchableOpacity, Text } fr
 import { useAuth } from '../context/AuthContext';
 import { StackNavigationProp } from '@react-navigation/stack';
 
-// 🔧 Corrigir a tipagem das rotas incluindo "Dashboard"
 type RootStackParamList = {
   Login: undefined;
   Register: undefined;
-  Dashboard: undefined; // <--- adicionado
+  Dashboard: undefined; 
 };
 
-// Tipagem da prop navigation
+// tipagem da prop navigation
 type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
-// Tipagem das props do componente
+// tipagem das props do componente
 interface Props {
   navigation: LoginScreenNavigationProp;
 }

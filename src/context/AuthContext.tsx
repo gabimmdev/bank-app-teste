@@ -33,14 +33,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const login = async (email: string, password: string) => {
-    if (email === 'teste@fiap.com' && password === '1234') {
-      const fakeUser = { name: 'João FIAP', email };
-      setUser(fakeUser);
-      await AsyncStorage.setItem('user', JSON.stringify(fakeUser));
-      return true;
-    }
-    return false;
-  };
+    const storedUser = await AsyncStorage.getItem('registeredUser');
+
+  if (!storedUser) return false;
+
+  const parsedUser = JSON.parse(storedUser);
+
+  if (parsedUser.email === email && parsedUser.senha === password) {
+    const loggedUser = { name: parsedUser.name, email: parsedUser.email };
+    setUser(loggedUser);
+    await AsyncStorage.setItem('user', JSON.stringify(loggedUser));
+    return true;
+  }
+
+  return false;
+};
 
   const register = async (name: string, email: string, password: string) => {
     const newUser = { name, email };

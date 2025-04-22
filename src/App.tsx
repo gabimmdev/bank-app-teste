@@ -6,12 +6,12 @@ import { NavigationContainer } from '@react-navigation/native'; // 👈 Importar
 
 export default function App() {
   return (
+    <NavigationContainer>
     <PaperProvider>
       <AuthProvider>
-        <NavigationContainer> 
           <Routes />
-        </NavigationContainer>
       </AuthProvider>
     </PaperProvider>
+    </NavigationContainer>
   );
 }

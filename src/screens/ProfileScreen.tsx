@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
 import { useAuth } from '../context/AuthContext';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-
 type RootStackParamList = {
   Login: undefined;
   Register: undefined;
@@ -11,15 +8,8 @@ type RootStackParamList = {
 };
 
 export default function ProfileScreen() {
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   const { user, updateUser, logout } = useAuth();
   const [name, setName] = useState(user?.name || '');
-
-  useEffect(() => {
-    if (user) {
-      navigation.replace('Dashboard');
-    }
-  }, [user]);
 
   const handleSave = () => {
     if (!name.trim()) {

@@ -21,6 +21,7 @@ export default function Routes() {
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Transition" component={NewTransitionScreen} />
       <Stack.Screen name="Perfil" component={ProfileScreen}/>
+      <Stack.Screen name="Dashboard" component={DashboardScreen}/>
     </>
 </Stack.Navigator>
   );

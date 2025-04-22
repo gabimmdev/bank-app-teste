@@ -11,9 +11,9 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { useAuth } from '../context/AuthContext'; // 👈 Certifique-se de importar o contexto
+import { useAuth } from '../context/AuthContext'; 
 
-// Definição dos tipos de navegação
+// definição dos tipos de navegação
 type RootStackParamList = {
   Login: undefined;
   Register: undefined;
@@ -24,13 +24,12 @@ type RegisterScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Reg
 
 export default function RegisterScreen() {
   const navigation = useNavigation<RegisterScreenNavigationProp>();
-  const { user } = useAuth(); // 👈 Captura o usuário do contexto
+  const { user } = useAuth(); 
   const [name, setName] = useState('');
   const [document, setDocument] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  // 👇 Redireciona automaticamente se o usuário já estiver logado
   useEffect(() => {
     if (user) {
       navigation.replace('Dashboard');

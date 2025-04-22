@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Button, Alert } from 'react-native';
 import { useAuth } from '../context/AuthContext';
-type RootStackParamList = {
-  Login: undefined;
-  Register: undefined;
-  Dashboard: undefined;
-};
 
 export default function ProfileScreen() {
   const { user, updateUser, logout } = useAuth();
